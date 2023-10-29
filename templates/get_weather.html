@@ -8,255 +8,213 @@
 <body>
 
 <div class="split left">
-  <div class="centered">
-<h1 id="title">{{ pageTitle }}</h1>
-        <form method = "POST">
-            <div class="form-group">
-                <label for="city_label">City:</label>
-                <input type="text" name="city" id="city" placeholder="Rochester" required>
-            </div>
- <div class="form-group">
-                <label for="days_label">Days:</label>
-                <input type="text" name="num_days" id="num_days" placeholder="2" required>
+      <div class="centered">
+            <h1 id="title">{{ pageTitle }}</h1>
+            <form method = "POST">
+                <div class="form-group">
+                    <label for="city_label">City:</label>
+                    <input type="text" name="city" id="city" placeholder="Rochester" required>
+                </div>
+                <div class="form-group">
+                    <label for="days_label">Days:</label>
+                    <input type="text" name="num_days" id="num_days" placeholder="2" required>
 
-            </div>
-            <div id="error_message" style="color: red;"></div>
-            <br>
-            <input class="button" type="submit" formaction="/get_weather" value="Get Weather">
+                </div>
+                <div id="error_message" style="color: red;"></div><br>
+                <input class="button" type="submit" formaction="/get_weather" value="Get Weather">
 
-        </form>
-  </div>
+            </form>
+      </div>
 </div>
 
 
 
 <div class="split right">
   <div class="centered">
-      <div id="current-forecast-data" >
-        {%- for day in days -%}
-                         {% if day == 1 %}
-          <div id="city-name">{{ city }} </div>
-        <div id="current-temp">{{ weather_data.current.temp_c }}°C /  {{ weather_data.current.temp_f }}°F </div>
-          <div id="current-condition">{{ weather_data.forecast.forecastday[day-1].day.condition.text }}</div>
-          <div id="current-min-max-temp">H: {{ weather_data.forecast.forecastday[day-1].day.maxtemp_c }}°C /
-              {{ weather_data.forecast.forecastday[day-1].day.maxtemp_f }}°F &emsp13;
-        L: {{ weather_data.forecast.forecastday[day-1].day.mintemp_c }}°C /
-              {{ weather_data.forecast.forecastday[day-1].day.mintemp_f }}°F
-          </div>
-    {% endif %}
+          <div id="current-forecast-data" >
+            {%- for day in days -%}
+              {% if day == 1 %}
+                  <div id="city-name">{{ city }} </div>
+                  <div id="current-temp">{{ weather_data.current.temp_c }}°C /  {{ weather_data.current.temp_f }}°F </div>
+                  <div id="current-condition">{{ weather_data.forecast.forecastday[day-1].day.condition.text }}</div>
+                  <div id="current-min-max-temp">H: {{ weather_data.forecast.forecastday[day-1].day.maxtemp_c }}°C /
+                      {{ weather_data.forecast.forecastday[day-1].day.maxtemp_f }}°F &emsp13;
+                        L: {{ weather_data.forecast.forecastday[day-1].day.mintemp_c }}°C /
+                      {{ weather_data.forecast.forecastday[day-1].day.mintemp_f }}°F
+                  </div>
+              {% endif %}
           {%- endfor -%}
-      </div>
+          </div>
 
 
-      <div id="hourly-forecast-header" >
-                  HOURLY FORECAST
-              </div>
-<div id="hourly-forecast-container">
+          <div id="hourly-forecast-header" >
+                      HOURLY FORECAST
+          </div>
 
-    {%- for day in days -%}
-        {% for hour in hours %}
-            <div class="hourly-entry">{{ weather_data.forecast.forecastday[day-1].hour[hour].time }}<br>
-                                        {% if  'rain' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower  %}
-                <img src="static/rainny.png" alt="weather-img" class="weather-img" id="weather-img" >
+          <div id="hourly-forecast-container">
+            {%- for day in days -%}
+                {% for hour in hours %}
+                    <div class="hourly-entry">{{ weather_data.forecast.forecastday[day-1].hour[hour].time }}<br>
+                                                {% if  'rain' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower  %}
+                        <img src="static/rainny.png" alt="weather-img" class="weather-img"  >
 
-                {% elif 'sun' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower %}
-                <img src="static/sunny.png" alt="weather-img" class="weather-img" id="weather-img" >
+                        {% elif 'sun' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower %}
+                        <img src="static/sunny.png" alt="weather-img" class="weather-img" >
 
-                {% elif 'drizzle' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower %}
-                <img src="static/drizzle.png" alt="weather-img" class="weather-img" id="weather-img" >
+                        {% elif 'drizzle' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower %}
+                        <img src="static/drizzle.png" alt="weather-img" class="weather-img">
 
-                {% elif 'mist' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower %}
-                <img src="static/mist.png" alt="weather-img" class="weather-img" id="weather-img" >
+                        {% elif 'mist' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower %}
+                        <img src="static/mist.png" alt="weather-img" class="weather-img">
 
-                {% elif 'clear' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower %}
-                <img src="static/clear-sky.png" alt="weather-img" class="weather-img" id="weather-img" >
+                        {% elif 'clear' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower %}
+                        <img src="static/clear-sky.png" alt="weather-img" class="weather-img" >
 
-                {% elif 'overcast' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower %}
-                <img src="static/overcast.png" alt="weather-img" class="weather-img" id="weather-img" >
+                        {% elif 'overcast' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower %}
+                        <img src="static/overcast.png" alt="weather-img" class="weather-img">
 
-                {% elif 'snow' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower %}
-                <img src="static/snow.png" alt="weather-img" class="weather-img" id="weather-img" >
+                        {% elif 'snow' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower %}
+                        <img src="static/snow.png" alt="weather-img" class="weather-img">
 
-                {% elif 'thunder' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower %}
-                <img src="static/thunderstorm.png" alt="weather-img" class="weather-img" id="weather-img" >
+                        {% elif 'thunder' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower %}
+                        <img src="static/thunderstorm.png" alt="weather-img" class="weather-img">
 
-                {% elif 'cloudy' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower %}
-                <img src="static/cloudy.png" alt="weather-img" class="weather-img" id="weather-img" >
+                        {% elif 'cloudy' in weather_data.forecast.forecastday[day-1].hour[hour].condition.text|lower %}
+                        <img src="static/cloudy.png" alt="weather-img" class="weather-img">
 
-                {% else %}
-                <img src="static/other-condition.png" alt="weather-img" class="weather-img" id="weather-img" >
-                {% endif %}<br>
-            {{ weather_data.forecast.forecastday[day-1].hour[hour].temp_c }}°C /
-            {{ weather_data.forecast.forecastday[day-1].hour[hour].temp_f }}°F</div>
-        {%- endfor -%}
-    {%- endfor -%}
-</div>
+                        {% else %}
+                        <img src="static/other-condition.png" alt="weather-img" class="weather-img" id="weather-img" >
+                        {% endif %}<br>
+                    {{ weather_data.forecast.forecastday[day-1].hour[hour].temp_c }}°C /
+                    {{ weather_data.forecast.forecastday[day-1].hour[hour].temp_f }}°F</div>
+                {%- endfor -%}
+            {%- endfor -%}
+        </div>
 
 
 
-          <div id="three-day-forecast">
+        <div id="three-day-forecast">
               {%- for day in days -%}
               {% if day == 1 %}
-              <div id="individual-day-forecast-header" >
+                <div id="individual-day-forecast-header" >
                   {{ days_count }}-DAY FORECAST
-              </div>
+                </div>
               {% endif %}
-        <div id="individual-day-forecast" class="card" onclick="openPopupWindow(this)">
-        {{ weather_data.forecast.forecastday[day-1].date }} &emsp13; &emsp13; &emsp13;
-            {% if  'rain' in weather_data.forecast.forecastday[day-1].day.condition.text|lower  %}
-                <img src="static/rainny.png" alt="weather-img" class="weather-img-card" id="weather-img-card" >
+                <div id="individual-day-forecast" class="card" onclick="openPopupWindow(this)">
+                {{ weather_data.forecast.forecastday[day-1].date }} &emsp13; &emsp13; &emsp13;
+                    {% if  'rain' in weather_data.forecast.forecastday[day-1].day.condition.text|lower  %}
+                        <img src="static/rainny.png" alt="weather-img" class="weather-img-card">
 
-                {% elif 'sun' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
-                <img src="static/sunny.png" alt="weather-img" class="weather-img-card" id="weather-img-card" >
+                        {% elif 'sun' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
+                        <img src="static/sunny.png" alt="weather-img" class="weather-img-card">
 
-                {% elif 'drizzle' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
-                <img src="static/drizzle.png" alt="weather-img" class="weather-img-card" id="weather-img-card" >
+                        {% elif 'drizzle' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
+                        <img src="static/drizzle.png" alt="weather-img" class="weather-img-card" >
 
-                {% elif 'mist' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
-                <img src="static/mist.png" alt="weather-img" class="weather-img-card" id="weather-img-card" >
+                        {% elif 'mist' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
+                        <img src="static/mist.png" alt="weather-img" class="weather-img-card">
 
-                {% elif 'clear' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
-                <img src="static/clear-sky.png" alt="weather-img" class="weather-img-card" id="weather-img-card" >
+                        {% elif 'clear' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
+                        <img src="static/clear-sky.png" alt="weather-img" class="weather-img-card">
 
-                {% elif 'cloud' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
-                <img src="static/cloudy.png" alt="weather-img" class="weather-img-card" id="weather-img-card" >
+                        {% elif 'cloud' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
+                        <img src="static/cloudy.png" alt="weather-img" class="weather-img-card">
 
-            {% elif 'overcast' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
-                <img src="static/overcast.png" alt="weather-img" class="weather-img-card" id="weather-img-card" >
+                    {% elif 'overcast' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
+                        <img src="static/overcast.png" alt="weather-img" class="weather-img-card" >
 
-            {% elif 'snow' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
-                <img src="static/snow.png" alt="weather-img" class="weather-img-card" id="weather-img-card" >
+                    {% elif 'snow' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
+                        <img src="static/snow.png" alt="weather-img" class="weather-img-card">
 
-            {% elif 'thunder' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
-                <img src="static/thunderstorm.png" alt="weather-img" class="weather-img-card" id="weather-img-card" >
-            {% else %}
-                <img src="static/other-condition.jpg" alt="weather-img" class="weather-img-card" id="weather-img-card" >
-                {% endif %}
+                    {% elif 'thunder' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
+                        <img src="static/thunderstorm.png" alt="weather-img" class="weather-img-card">
+                    {% else %}
+                        <img src="static/other-condition.jpg" alt="weather-img" class="weather-img-card">
+                        {% endif %}
+                            &emsp13; &emsp13;&emsp13;
+                    {{ weather_data.forecast.forecastday[day-1].day.mintemp_f }}°F
                     &emsp13; &emsp13;&emsp13;
-            {{ weather_data.forecast.forecastday[day-1].day.mintemp_f }}°F
-            &emsp13; &emsp13;&emsp13;
-            {{ weather_data.forecast.forecastday[day-1].day.maxtemp_f }}°F
+                    {{ weather_data.forecast.forecastday[day-1].day.maxtemp_f }}°F
 
-            &emsp13; &emsp13;&emsp13;
-            <img src="static/sunrise.png" alt="weather-img" class="weather-img-card" id="weather-img-card" >
-            {{ weather_data.forecast.forecastday[day-1].astro.sunrise }}
-            &emsp13; &emsp13;&emsp13;
-            <img src="static/sunset.png" alt="weather-img" class="weather-img-card" id="weather-img-card" >
-            {{ weather_data.forecast.forecastday[day-1].astro.sunset }}
+                    &emsp13; &emsp13;&emsp13;
+                    <img src="static/sunrise.png" alt="weather-img" class="weather-img-card">
+                    {{ weather_data.forecast.forecastday[day-1].astro.sunrise }}
+                    &emsp13; &emsp13;&emsp13;
+                    <img src="static/sunset.png" alt="weather-img" class="weather-img-card" >
+                    {{ weather_data.forecast.forecastday[day-1].astro.sunset }}
 
 
 
             <div class="popup">
                 <div class="flex-container">
                     <img src="static/close.png" alt="close" class="close" id="close" >
-                    <div id="popup-element">
+                    <div class="popup-element">
                         <p>
-                        {% if  'rain' in weather_data.forecast.forecastday[day-1].day.condition.text|lower  %}
-                <img src="static/rainny.png" alt="weather-img" class="condition-img-popup" id="condition-img-popup" >
+                {% if  'rain' in weather_data.forecast.forecastday[day-1].day.condition.text|lower  %}
+                <img src="static/rainny.png" alt="weather-img" class="condition-img-popup">
 
                 {% elif 'sun' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
-                <img src="static/sunny.png" alt="weather-img" class="condition-img-popup" id="condition-img-popup" >
+                <img src="static/sunny.png" alt="weather-img" class="condition-img-popup" >
 
                 {% elif 'drizzle' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
-                <img src="static/drizzle.png" alt="weather-img" class="condition-img-popup" id="condition-img-popup" >
+                <img src="static/drizzle.png" alt="weather-img" class="condition-img-popup">
 
                 {% elif 'mist' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
-                <img src="static/mist.png" alt="weather-img" class="condition-img-popup" id="condition-img-popup" >
+                <img src="static/mist.png" alt="weather-img" class="condition-img-popup">
 
                 {% elif 'clear' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
-                <img src="static/clear-sky.png" alt="weather-img" class="condition-img-popup" id="condition-img-popup" >
+                <img src="static/clear-sky.png" alt="weather-img" class="condition-img-popup">
 
                 {% elif 'cloud' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
-                <img src="static/cloudy.png" alt="weather-img" class="condition-img-popup" id="condition-img-popup" >
+                <img src="static/cloudy.png" alt="weather-img" class="condition-img-popup">
 
-            {% elif 'overcast' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
-                <img src="static/overcast.png" alt="weather-img" class="condition-img-popup" id="condition-img-popup" >
+                {% elif 'overcast' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
+                    <img src="static/overcast.png" alt="weather-img" class="condition-img-popup">
 
-            {% elif 'snow' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
-                <img src="static/snow.png" alt="weather-img" class="condition-img-popup" id="condition-img-popup" >
+                {% elif 'snow' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
+                    <img src="static/snow.png" alt="weather-img" class="condition-img-popup">
 
-            {% elif 'thunder' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
-                <img src="static/thunderstorm.png" alt="weather-img" class="condition-img-popup" id="condition-img-popup" >
-            {% else %}
-                <img src="static/other-condition.jpg" alt="weather-img" class="condition-img-popup" id="condition-img-popup" >
-                {% endif %}
-                            CONDITION </p>
-                        {{ weather_data.forecast.forecastday[day-1].day.condition.text }}
-                    </div>
-                    <div id="popup-element">
-                        <p> <img src="static/sunny.png" alt="weather-img" class="condition-img-popup" id="condition-img-popup" >
-                        UV INDEX </p>
+                {% elif 'thunder' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}
+                    <img src="static/thunderstorm.png" alt="weather-img" class="condition-img-popup">
+                {% else %}
+                    <img src="static/other-condition.jpg" alt="weather-img" class="condition-img-popup">
+                    {% endif %}
+                        CONDITION </p>
+                    {{ weather_data.forecast.forecastday[day-1].day.condition.text }}
+                </div>
+                <div class="popup-element">
+                    <p> <img src="static/sunny.png" alt="weather-img" class="condition-img-popup">
+                    UV INDEX </p>
 
-                        {{ weather_data.forecast.forecastday[day-1].day.uv }}
-                    </div>
-                    <div id="popup-element">
-                        <p> <img src="static/humidity.png" alt="weather-img" class="condition-img-popup" id="condition-img-popup" >
-                            HUMIDITY</p>
-                        {{ weather_data.forecast.forecastday[day-1].day.avghumidity }}
-                    </div>
-                    <div id="popup-element">
-                        <p> <img src="static/precipitation.png" alt="weather-img" class="condition-img-popup" id="condition-img-popup" >
-                            PRECIPITATION </p>
-                        {{ weather_data.forecast.forecastday[day-1].day.totalprecip_in }}
-                    </div>
-                    <div id="popup-element">
-                        <p> <img src="static/windspeed.png" alt="weather-img" class="condition-img-popup" id="condition-img-popup" >
-                            MAX WIND SPEED</p>
-                        {{ weather_data.forecast.forecastday[day-1].day.maxwind_mph }}
-                    </div>
-                    <div id="popup-element">
-                        <p> <img src="static/rainny.png" alt="weather-img" class="condition-img-popup" id="condition-img-popup" >
-                            CHANCE OF RAIN </p>
-                        {{ weather_data.forecast.forecastday[day-1].day.daily_chance_of_rain }}
-                    </div>
-
-
-
-
+                    {{ weather_data.forecast.forecastday[day-1].day.uv }}
+                </div>
+                <div class="popup-element">
+                    <p> <img src="static/humidity.png" alt="weather-img" class="condition-img-popup" style="width: 20%">
+                        HUMIDITY</p>
+                    {{ weather_data.forecast.forecastday[day-1].day.avghumidity }}
+                </div>
+                <div class="popup-element">
+                    <p> <img src="static/precipitation.png" alt="weather-img" class="condition-img-popup">
+                        PRECIPITATION </p>
+                    {{ weather_data.forecast.forecastday[day-1].day.totalprecip_in }}
+                </div>
+                <div class="popup-element">
+                    <p> <img alt="weather-img" class="condition-img-popup" src="static/windspeed.png">
+                        MAX WIND SPEED</p>
+                    {{ weather_data.forecast.forecastday[day-1].day.maxwind_mph }}
+                </div>
+                <div class="popup-element">
+                    <p> <img src="static/rainny.png" alt="weather-img" class="condition-img-popup">
+                        CHANCE OF RAIN </p>
+                    {{ weather_data.forecast.forecastday[day-1].day.daily_chance_of_rain }}
                 </div>
             </div>
         </div>
-{%- endfor -%}
-          </div>
-
-
-
-
-
-
+        </div>
+        {%- endfor -%}
+        </div>
   </div>
 </div>
-
-
-
-
-
-
-<!--<div class="split right">-->
-<!--  <div class="centered">-->
-<!--      <div id="forecast-data" >-->
-<!--        {%- for days in days -%}-->
-<!--        <div id="individual-day-forecast" class="card" onclick="openPopupWindow(this)">-->
-<!--        <h3>{{ weather_data.forecast.forecastday[days-1].date }}</h3>-->
-<!--        <p id="forecast-condition{{ days }}">Condition: {{ weather_data.forecast.forecastday[days-1].day.condition.text }}</p>-->
-<!--        <p id="max-temperature{{ days }}">Max Temperature: {{ weather_data.forecast.forecastday[days-1].day.maxtemp_c }}°C / {{ weather_data.forecast.forecastday[days-1].day.maxtemp_f }}°F</p>-->
-<!--        <p id="min-temperature{{ days }}">Min Temperature: {{ weather_data.forecast.forecastday[days-1].day.mintemp_c }}°C / {{ weather_data.forecast.forecastday[days-1].day.mintemp_f }}°F</p>-->
-<!--        <p id="chance-of-rain{{ days }}">Chance of Rain: {{ weather_data.forecast.forecastday[days-1].day.daily_chance_of_rain }}%</p>-->
-<!--            <div class="popup">-->
-<!--                <div class="popup-content">-->
-<!--                    <img src="static/close.png" alt="close" class="close" id="close" >-->
-<!--                    <p id="forecast-condition{{ days }}">Condition: {{ weather_data.forecast.forecastday[days-1].day.condition.text }}</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        {%- endfor -%}-->
-<!--      </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-
-
-
 
 </body>
 </html>
