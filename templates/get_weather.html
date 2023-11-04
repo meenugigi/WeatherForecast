@@ -106,8 +106,8 @@
               {%- for day in three_day_forecast_list -%}
 
                 <div id="individual-day-forecast" class="card" onclick="openPopupWindow(this)">
-                {{ day[2] }} &emsp13; &emsp13; &emsp13;
-                    {% if  'rain' in day[5]|lower  %}
+                {{ day[2] }} &emsp13; &emsp13; <!--     display date-->
+                    {% if  'rain' in day[5]|lower  %} <!--     for forecast condition-->
                         <img src="static/rainny.png" alt="weather-img" class="weather-img-card">
 
                         {% elif 'sun' in day[5]|lower %}
@@ -137,16 +137,16 @@
                         <img src="static/other-condition.jpg" alt="weather-img" class="weather-img-card">
                         {% endif %}
                             &emsp13; &emsp13;&emsp13;
-                    {{ day[1] }}{{ temp_scale }}
+                    {{ day[1] }}{{ temp_scale }} <!--     min temp-->
                     &emsp13; &emsp13;&emsp13;
-                    {{ day[0] }}{{ temp_scale }}
+                    {{ day[0] }}{{ temp_scale }} <!--     max temp-->
 
                     &emsp13; &emsp13;&emsp13;
                     <img src="static/sunrise.png" alt="weather-img" class="weather-img-card">
-                    {{ day[3] }}
+                    {{ day[3] }}<!--     display sunrise time-->
                     &emsp13; &emsp13;&emsp13;
                     <img src="static/sunset.png" alt="weather-img" class="weather-img-card" >
-                    {{ day[4] }}
+                    {{ day[4] }}<!--     display sunset time-->
 
 
 
@@ -186,33 +186,32 @@
                     <img src="static/other-condition.jpg" alt="weather-img" class="condition-img-popup">
                     {% endif %}
                         CONDITION </p>
-                    {{ day[5] }}
+                    {{ day[5] }}<!--     display forecast condition-->
                 </div>
                 <div class="popup-element">
                     <p> <img src="static/sunny.png" alt="weather-img" class="condition-img-popup">
                     UV INDEX </p>
-
-                    {{ day[6] }}
+                    {{ day[6] }}<!--     uv index-->
                 </div>
                 <div class="popup-element">
                     <p> <img src="static/humidity.png" alt="weather-img" class="condition-img-popup" style="width: 20%">
                         HUMIDITY</p>
-                    {{ day[7] }}
+                    {{ day[7] }} <!--     display humidity-->
                 </div>
                 <div class="popup-element">
                     <p> <img src="static/precipitation.png" alt="weather-img" class="condition-img-popup">
                         PRECIPITATION </p>
-                    {{ day[8] }}
+                    {{ day[8] }} <!--     display precipitation-->
                 </div>
                 <div class="popup-element">
                     <p> <img alt="weather-img" class="condition-img-popup" src="static/windspeed.png">
                         MAX WIND SPEED</p>
-                    {{ day[9] }}
+                    {{ day[9] }}<!--     display max wind speed-->
                 </div>
                 <div class="popup-element">
                     <p> <img src="static/rainny.png" alt="weather-img" class="condition-img-popup">
                         CHANCE OF RAIN </p>
-                    {{ day[10] }}
+                    {{ day[10] }}<!--     display chances of rain-->
                 </div>
             </div>
         </div>

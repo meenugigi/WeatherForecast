@@ -24,6 +24,7 @@ def index():
 def get_weather():
     """
         Fetches data from the Weather API for the city and days received through input form.
+        https://rapidapi.com/weatherapi/api/weatherapi-com/
         Calls the get_weather_in_fahrenheit to display forecast data in fahrenheit.
         :param : none
         :return: get_weather.html template that displays the weather information.
@@ -79,6 +80,7 @@ def get_weather_in_fahrenheit():
 def get_weather_in_celsius():
     """
         Displays data on page header and the 'num_days' forecast data on Celsius temp scale.
+        https://documenter.getpostman.com/view/1559645/Szf3ZA2P
         Invokes SOAP service to convert Fahrenheit to Celsius using a public API.
         :param : none
         :return: get_weather.html template that displays the weather information in Celsius
