@@ -37,7 +37,7 @@ body {
 /* for column displaying input form details */
 .left {
   padding: 1%;
-  width: 26%;
+  width: 24%;
   margin-top: 2%;
   left: 0;
 }
@@ -79,7 +79,7 @@ input[type="text"] {
 /* form submit button */
 input[type="submit"] {
     padding: 10px 20px;
-    background-color: #007BFF;
+    background-color: #005580;
     color: white;
     border: none;
     border-radius: 5px;
@@ -90,6 +90,12 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #0056b3;
 }
+
+.temp-scale-button {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
 /* ---------------------------------END OF INPUT FORM STYLING ----------------------*/
 
 
@@ -98,7 +104,7 @@ input[type="submit"]:hover {
 /* ------------------------------CURRENT WEATHER STATUS SECTION ---------------------*/
 /* for right column displaying weather forecast details */
 .right {
-  width: 74%;
+  width: 76%;
   margin-left: 2%;
   right: 0;
   color: white;
@@ -124,12 +130,16 @@ input[type="submit"]:hover {
 }
 
 /* styling current weather condition and min and max temp */
-#current-condition,#current-min-max-temp {
+#current-condition,#current-max-temp, #current-min-temp {
     font-size: 14px;
 }
 
+#current-max-temp, #current-min-temp {
+    display: inline-block;
+}
+
 /* common attributes */
-#city-name,#current-temp,#current-condition,#current-min-max-temp {
+#city-name,#current-temp,#current-condition,#current-max-temp, #current-min-temp {
     margin: 0;
     padding: 0;
     line-height: 1;
@@ -168,7 +178,7 @@ input[type="submit"]:hover {
 }
 
 /* weather img displayed based on hourly forecast condition */
-#weather-img {
+.weather-img {
     height: 45%;
     width: 40%;
 }
@@ -178,6 +188,7 @@ input[type="submit"]:hover {
 /*-------------------------------------THREE DAY WEATHER FORECAST --------------------------*/
 #three-day-forecast{
     padding: 4%;
+    padding-top: 0;
     display: flex;
     margin-left: 8%;
     flex-direction: column;
@@ -190,7 +201,11 @@ input[type="submit"]:hover {
     font-size: 12px;
     text-align: left;
     color: gray;
+    padding: 4%;
+    padding-bottom: 0%;
+    margin-left: 8%;
 }
+
 
 /* displaying 3 day forecast as a card */
 .card {
@@ -208,7 +223,7 @@ input[type="submit"]:hover {
 }
 
 /* 3 day weather forecast img based on forecast condition */
-#weather-img-card{
+.weather-img-card{
     height: 6%;
     width: 6%;
 }
@@ -279,7 +294,7 @@ input[type="submit"]:hover {
 }
 
 
-#popup-element {
+.popup-element {
     background: #262626;
     border-radius: 10%;
     color: white;
@@ -289,11 +304,11 @@ input[type="submit"]:hover {
     margin: 3%;
     text-align: center;
 }
-#popup-element > p {
+.popup-element > p {
    font-size: 11px;
    color: gray;
 }
-#condition-img-popup{
+.condition-img-popup{
     width: 25%;
     height: 25%;
 }

@@ -2,7 +2,9 @@ document.addEventListener("DOMContentLoaded", function() {
     let isPopupOpen = false;
     // create a custom popup window on clicking each weather forecast card
     function openPopupWindow(card) {
-    // if window already open, indicat euser to close popup to open another popup window
+    // if window already open, indicate user to close popup to open another popup window
+    // if user attempts to open new window with another window open, span size of open window
+    // to indicate user to close it before opening another window.
         if(isPopupOpen) {
         const closeButtons = card.querySelectorAll(".popup");
                 closeButtons.forEach((closeButton) => {
@@ -36,7 +38,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 
-
+    // to display error warnings if user enters a value greater than 3
+    // or less than 1 for 'days' field on input form.
     const numDaysInput = document.getElementById("num_days");
     const errorMessage = document.getElementById("error_message");
 
@@ -51,6 +54,11 @@ document.addEventListener("DOMContentLoaded", function() {
             this.setCustomValidity("");
         }
     });
+
+
+
+
+
 
 
 });
