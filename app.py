@@ -14,6 +14,8 @@ days = []
 city = None;
 # list storing min and max temp in celsius for 'num_days'
 three_day_min_max_cel_list = []
+country = None;
+localtime = None;
 
 @app.route('/')
 def index():
@@ -47,8 +49,30 @@ def get_weather():
         weather_data = requests.get(url, headers=headers, params=querystring).json()
         days = list(range(1, num_days+1))
 
+        get_country_localtime(city)
+
         return redirect("/get_weather_in_fahrenheit")
     return   redirect("/")
+
+
+def get_country_localtime(city):
+    """
+       Fetches country and local time details from LocalTimeZone API
+       https://rapidapi.com/weatherapi/api/weatherapi-com/
+       :param : city : city for which the country and local time is fetched.
+       :return: none
+   """
+    global country, localtime
+    url = "https://weatherapi-com.p.rapidapi.com/timezone.json"
+    querystring = {"q": city}
+    headers = {
+        "X-RapidAPI-Key": "1f67aed425mshbbc3cb4d2bf13fap14b3f4jsne50da4bb50e2",
+        "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com"
+    }
+    response = requests.get(url, headers=headers, params=querystring).json()
+    country = response['location']['country']
+    localtime = response['location']['localtime']
+
 
 @app.route("/get_weather_in_fahrenheit", methods=['GET','POST'])
 def get_weather_in_fahrenheit():
@@ -70,7 +94,8 @@ def get_weather_in_fahrenheit():
                                hourly_forecast_header="HOURLY FORECAST", current_condition=three_day_forecast_list[0][5],
                                temp_scale="°F", current_temp=weather_data['current']['temp_f'], current_max_temp=three_day_forecast_list[0][0],
                                current_min_temp=three_day_forecast_list[0][1], three_day_forecast_list=three_day_forecast_list,
-                               button_value="View in °C", three_day_forecast_header="-DAY FORECAST")
+                               button_value="View in °C", three_day_forecast_header="-DAY FORECAST", separator=",",
+                               localtime_label="Localtime: ", country=country, localtime=localtime)
     except Exception as e:
         return render_template('get_weather.html', pageTitle=pageTitle,error_message="Please enter form details.")
 
@@ -118,8 +143,9 @@ def get_weather_in_celsius():
                                    hourly_forecast_header="HOURLY FORECAST", temp_scale = "°C", low="L: ", high="H: ",
                                    current_temp=round(float(current_temp_cel),1), current_condition = three_day_forecast_list[0][5],
                                    current_max_temp=round(float(three_day_forecast_list[0][0]),1),
-                                   current_min_temp=round(float(three_day_forecast_list[0][1]),1),
-                                   three_day_forecast_list=three_day_forecast_list, button_value="View in °F", three_day_forecast_header="-DAY FORECAST")
+                                   current_min_temp=round(float(three_day_forecast_list[0][1]),1),country=country, localtime=localtime,
+                                   three_day_forecast_list=three_day_forecast_list, button_value="View in °F",separator=",",
+                               localtime_label="Localtime: ", three_day_forecast_header="-DAY FORECAST")
         return redirect("/")
     except Exception as e:
         return render_template('get_weather.html',pageTitle=pageTitle, error_message="Please enter form details.")

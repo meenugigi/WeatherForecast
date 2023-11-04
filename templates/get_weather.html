@@ -43,11 +43,12 @@
 <div class="split right">
   <div class="centered">
           <div id="current-forecast-data" >
-                  <div id="city-name">{{ city }} </div>
+                  <div id="city-name">{{ city }}{{ separator }} {{ country }}</div>
                   <div id="current-temp">{{ current_temp }}{{ temp_scale }}</div>
                   <div id="current-condition">{{ current_condition }}</div>
                         {{ low }} <p id="current-min-temp">{{ current_min_temp }}{{ temp_scale }}</p> &emsp13; &emsp13; &emsp13;
                   {{ high }} <p id="current-max-temp">{{ current_max_temp }}{{ temp_scale }} &emsp13;</p>
+              <div id="localtime">{{localtime_label }}{{ localtime }}</div>
           </div>
 
 

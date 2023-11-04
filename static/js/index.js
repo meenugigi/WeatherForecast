@@ -2,21 +2,11 @@ document.addEventListener("DOMContentLoaded", function() {
     let isPopupOpen = false;
     // create a custom popup window on clicking each weather forecast card
     function openPopupWindow(card) {
-    // if window already open, indicate user to close popup to open another popup window
-    // if user attempts to open new window with another window open, span size of open window
-    // to indicate user to close it before opening another window.
-        if(isPopupOpen) {
-        const closeButtons = card.querySelectorAll(".popup");
-                closeButtons.forEach((closeButton) => {
-                    closeButton.classList.add("enlarged");
-                    setTimeout(() => {
-                        closeButton.classList.remove("enlarged");
-                    }, 150);
-                });
-            return;
+    // open popup if not popups are open.
+        if(!isPopupOpen) {
+            isPopupOpen = true;
+            card.querySelector(".popup").style.display = "flex";
         }
-        isPopupOpen = true;
-        card.querySelector(".popup").style.display = "flex";
     }
 
     // Event listeners to open popups for each card

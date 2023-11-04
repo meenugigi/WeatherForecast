@@ -130,19 +130,22 @@ input[type="submit"]:hover {
 }
 
 /* styling current weather condition and min and max temp */
-#current-condition,#current-max-temp, #current-min-temp {
+#current-condition,#current-max-temp, #current-min-temp, #localtime  {
     font-size: 14px;
 }
 
 #current-max-temp, #current-min-temp {
     display: inline-block;
 }
+#localtime {
+    color: gray;
+}
 
 /* common attributes */
-#city-name,#current-temp,#current-condition,#current-max-temp, #current-min-temp {
+#city-name,#current-temp,#current-condition,#current-max-temp, #current-min-temp, #localtime {
     margin: 0;
     padding: 0;
-    line-height: 1;
+
 }
 /*--------------------------------END OF CURRENT WEATHER STATUS SECTION -------------------*/
 
