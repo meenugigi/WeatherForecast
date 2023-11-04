@@ -43,16 +43,11 @@
 <div class="split right">
   <div class="centered">
           <div id="current-forecast-data" >
-            {%- for day in days -%}
-              {% if day == 1 %}
                   <div id="city-name">{{ city }} </div>
-                  <div id="current-temp">{{ current_temp }}°{{ temp_scale }}</div>
-                  <div id="current-condition">{{ weather_data.forecast.forecastday[day-1].day.condition.text }}</div>
-                        L: <p id="current-min-temp">{{ current_min_temp }}°{{ temp_scale }}</p> &emsp13; &emsp13; &emsp13;
-                  H: <p id="current-max-temp">{{ current_max_temp }}°{{ temp_scale }} &emsp13;</p>
-              {% endif %}
-          {%- endfor -%}
-
+                  <div id="current-temp">{{ current_temp }}{{ temp_scale }}</div>
+                  <div id="current-condition">{{ current_condition }}</div>
+                        {{ low }} <p id="current-min-temp">{{ current_min_temp }}{{ temp_scale }}</p> &emsp13; &emsp13; &emsp13;
+                  {{ high }} <p id="current-max-temp">{{ current_max_temp }}{{ temp_scale }} &emsp13;</p>
           </div>
 
 
@@ -109,11 +104,7 @@
                 </div>
               <div id="three-day-forecast">
               {%- for day in three_day_forecast_list -%}
-<!--              {% if day == 1 %}-->
-<!--                <div id="individual-day-forecast-header" >-->
-<!--                  {{ days_count }}-DAY FORECAST-->
-<!--                </div>-->
-<!--              {% endif %}-->
+
                 <div id="individual-day-forecast" class="card" onclick="openPopupWindow(this)">
                 {{ day[2] }} &emsp13; &emsp13; &emsp13;
                     {% if  'rain' in day[5]|lower  %}
@@ -146,9 +137,9 @@
                         <img src="static/other-condition.jpg" alt="weather-img" class="weather-img-card">
                         {% endif %}
                             &emsp13; &emsp13;&emsp13;
-                    {{ day[1] }}°{{ temp_scale }}
+                    {{ day[1] }}{{ temp_scale }}
                     &emsp13; &emsp13;&emsp13;
-                    {{ day[0] }}°{{ temp_scale }}
+                    {{ day[0] }}{{ temp_scale }}
 
                     &emsp13; &emsp13;&emsp13;
                     <img src="static/sunrise.png" alt="weather-img" class="weather-img-card">
@@ -232,149 +223,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--        <div id="three-day-forecast">-->
-<!--              {%- for day in days -%}-->
-<!--              {% if day == 1 %}-->
-<!--                <div id="individual-day-forecast-header" >-->
-<!--                  {{ days_count }}-DAY FORECAST-->
-<!--                </div>-->
-<!--              {% endif %}-->
-<!--                <div id="individual-day-forecast" class="card" onclick="openPopupWindow(this)">-->
-<!--                {{ weather_data.forecast.forecastday[day-1].date }} &emsp13; &emsp13; &emsp13;-->
-<!--                    {% if  'rain' in weather_data.forecast.forecastday[day-1].day.condition.text|lower  %}-->
-<!--                        <img src="static/rainny.png" alt="weather-img" class="weather-img-card">-->
-
-<!--                        {% elif 'sun' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}-->
-<!--                        <img src="static/sunny.png" alt="weather-img" class="weather-img-card">-->
-
-<!--                        {% elif 'drizzle' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}-->
-<!--                        <img src="static/drizzle.png" alt="weather-img" class="weather-img-card" >-->
-
-<!--                        {% elif 'mist' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}-->
-<!--                        <img src="static/mist.png" alt="weather-img" class="weather-img-card">-->
-
-<!--                        {% elif 'clear' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}-->
-<!--                        <img src="static/clear-sky.png" alt="weather-img" class="weather-img-card">-->
-
-<!--                        {% elif 'cloud' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}-->
-<!--                        <img src="static/cloudy.png" alt="weather-img" class="weather-img-card">-->
-
-<!--                    {% elif 'overcast' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}-->
-<!--                        <img src="static/overcast.png" alt="weather-img" class="weather-img-card" >-->
-
-<!--                    {% elif 'snow' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}-->
-<!--                        <img src="static/snow.png" alt="weather-img" class="weather-img-card">-->
-
-<!--                    {% elif 'thunder' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}-->
-<!--                        <img src="static/thunderstorm.png" alt="weather-img" class="weather-img-card">-->
-<!--                    {% else %}-->
-<!--                        <img src="static/other-condition.jpg" alt="weather-img" class="weather-img-card">-->
-<!--                        {% endif %}-->
-<!--                            &emsp13; &emsp13;&emsp13;-->
-<!--                    {{ weather_data.forecast.forecastday[day-1].day.mintemp_f }}°F-->
-<!--                    &emsp13; &emsp13;&emsp13;-->
-<!--                    {{ weather_data.forecast.forecastday[day-1].day.maxtemp_f }}°F-->
-
-<!--                    &emsp13; &emsp13;&emsp13;-->
-<!--                    <img src="static/sunrise.png" alt="weather-img" class="weather-img-card">-->
-<!--                    {{ weather_data.forecast.forecastday[day-1].astro.sunrise }}-->
-<!--                    &emsp13; &emsp13;&emsp13;-->
-<!--                    <img src="static/sunset.png" alt="weather-img" class="weather-img-card" >-->
-<!--                    {{ weather_data.forecast.forecastday[day-1].astro.sunset }}-->
-
-
-
-
-<!--            <div class="popup">-->
-<!--                <div class="flex-container">-->
-<!--                    <img src="static/close.png" alt="close" class="close" id="close" >-->
-<!--                    <div class="popup-element">-->
-<!--                        <p>-->
-<!--                {% if  'rain' in weather_data.forecast.forecastday[day-1].day.condition.text|lower  %}-->
-<!--                <img src="static/rainny.png" alt="weather-img" class="condition-img-popup">-->
-
-<!--                {% elif 'sun' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}-->
-<!--                <img src="static/sunny.png" alt="weather-img" class="condition-img-popup" >-->
-
-<!--                {% elif 'drizzle' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}-->
-<!--                <img src="static/drizzle.png" alt="weather-img" class="condition-img-popup">-->
-
-<!--                {% elif 'mist' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}-->
-<!--                <img src="static/mist.png" alt="weather-img" class="condition-img-popup">-->
-
-<!--                {% elif 'clear' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}-->
-<!--                <img src="static/clear-sky.png" alt="weather-img" class="condition-img-popup">-->
-
-<!--                {% elif 'cloud' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}-->
-<!--                <img src="static/cloudy.png" alt="weather-img" class="condition-img-popup">-->
-
-<!--                {% elif 'overcast' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}-->
-<!--                    <img src="static/overcast.png" alt="weather-img" class="condition-img-popup">-->
-
-<!--                {% elif 'snow' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}-->
-<!--                    <img src="static/snow.png" alt="weather-img" class="condition-img-popup">-->
-
-<!--                {% elif 'thunder' in weather_data.forecast.forecastday[day-1].day.condition.text|lower %}-->
-<!--                    <img src="static/thunderstorm.png" alt="weather-img" class="condition-img-popup">-->
-<!--                {% else %}-->
-<!--                    <img src="static/other-condition.jpg" alt="weather-img" class="condition-img-popup">-->
-<!--                    {% endif %}-->
-<!--                        CONDITION </p>-->
-<!--                    {{ weather_data.forecast.forecastday[day-1].day.condition.text }}-->
-<!--                </div>-->
-<!--                <div class="popup-element">-->
-<!--                    <p> <img src="static/sunny.png" alt="weather-img" class="condition-img-popup">-->
-<!--                    UV INDEX </p>-->
-
-<!--                    {{ weather_data.forecast.forecastday[day-1].day.uv }}-->
-<!--                </div>-->
-<!--                <div class="popup-element">-->
-<!--                    <p> <img src="static/humidity.png" alt="weather-img" class="condition-img-popup" style="width: 20%">-->
-<!--                        HUMIDITY</p>-->
-<!--                    {{ weather_data.forecast.forecastday[day-1].day.avghumidity }}-->
-<!--                </div>-->
-<!--                <div class="popup-element">-->
-<!--                    <p> <img src="static/precipitation.png" alt="weather-img" class="condition-img-popup">-->
-<!--                        PRECIPITATION </p>-->
-<!--                    {{ weather_data.forecast.forecastday[day-1].day.totalprecip_in }}-->
-<!--                </div>-->
-<!--                <div class="popup-element">-->
-<!--                    <p> <img alt="weather-img" class="condition-img-popup" src="static/windspeed.png">-->
-<!--                        MAX WIND SPEED</p>-->
-<!--                    {{ weather_data.forecast.forecastday[day-1].day.maxwind_mph }}-->
-<!--                </div>-->
-<!--                <div class="popup-element">-->
-<!--                    <p> <img src="static/rainny.png" alt="weather-img" class="condition-img-popup">-->
-<!--                        CHANCE OF RAIN </p>-->
-<!--                    {{ weather_data.forecast.forecastday[day-1].day.daily_chance_of_rain }}-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        </div>-->
-<!--        {%- endfor -%}-->
-<!--        </div>-->
   </div>
 </div>
 
