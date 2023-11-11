@@ -118,8 +118,8 @@ def get_weather_in_celsius():
         three_day_min_max_fah_list = _helper_get_three_day_minmax(days, weather_data)
         # Make API call to convert Fahrenheit to Cesius
         if request.method == "POST":
-            service_url = "https://www.w3schools.com/xml/tempconvert.asmx?WSDL"
-            client = Client(service_url)
+            url = "https://www.w3schools.com/xml/tempconvert.asmx?WSDL"
+            client = Client(url)
             current_temp = weather_data['current']['temp_f']
             # convert today's current temp to Celsius (displayed on page header)
             request_data = {
